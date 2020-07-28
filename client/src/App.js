@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ToolBar from './components/Toolbar'
-import Steps from './components/Steps'
+import Pads from './components/Pads'
 import TrackList from './components/TrackList'
 import PlayHead from './components/PlayHead'
 import { Provider } from './hooks/useStore'
@@ -65,7 +65,7 @@ function App() {
                     <h1 className="app_title">LILY-808</h1>
                     <ToolBar {...toolBarProps} />
                 </header>
-                <Steps count={totalSteps} />
+                <Pads count={totalSteps} />
                 <div className="app_content">
                     <PlayHead {...playHeadProps} />
                     <TrackList {...trackListProps} />
