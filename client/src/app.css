@@ -1,4 +1,4 @@
-:root {
+/* :root {
     --app-max-width: 0;
     --app-visibility: hidden;
   }
@@ -15,9 +15,29 @@
     visibility: var(--app-visibility);
     background-color: var(--color-bg);
     padding: 20px;
+  } */
+
+  .app_header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: calc(var(--spacer) * 1);
+    margin-left: var(--spacer);
+    margin-right: var(--spacer);
+  } 
+
+  .app_title   {
+      font-size: 80px;
+      color: purple;
+  }
+  #frog {
+      width: 300px;
+      margin-bottom: 20px;
   }
   
-  @media only screen and (min-width: 820px) {
+  /* @media only screen and (min-width: 820px) {
     .app {
       margin-top: var(--spacer);
       margin-bottom: var(--spacer);
@@ -27,7 +47,8 @@
   .app_header {
     display: flex;
     align-items: center;
-    justify-content: stretch;
+    justify-content: center;
+    text-align: center;
     margin-bottom: calc(var(--spacer) * 1);
     margin-left: var(--spacer);
     margin-right: var(--spacer);
@@ -54,5 +75,5 @@
     text-align: center;
     color: var(--color-dark-grey);
     background: transparent;
-  }
+  } */
   
