@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import ToolBar from './components/Toolbar'
+// import ToolBar from './components/Toolbar'
 import Pads from './components/Pads'
-import TrackList from './components/TrackList'
-import PlayHead from './components/PlayHead'
-import { Provider } from './hooks/useStore'
+// import TrackList from './components/TrackList'
+// import PlayHead from './components/PlayHead'
+// import { Provider } from './hooks/useStore'
 import useTimer from './hooks/useTimer'
-import useStyles from './hooks/useStyles'
-import './App.css'
+// import useStyles from './hooks/useStyles'
+// import './app.css'
 
 function App() {
 
@@ -21,9 +21,9 @@ function App() {
     const [startTime, setStartTime] = useState(null)
     const [pastLapsedTime, setPastLapse] = useState(0)
     const [currentStepID, setCurrentStep] = useState(null)
-    const [getNotesAreaWidthInPixels] = useStyles(totalSteps)
+    // const [getNotesAreaWidthInPixels] = useStyles(totalSteps)
 
-    const notesAreaWidthInPixels = getNotesAreaWidthInPixels(totalSteps)
+    // const notesAreaWidthInPixels = getNotesAreaWidthInPixels(totalSteps)
     const timePerSequence = baseBPMPerOneSecond / BPM * 1000 * totalBeats
     const timePerStep = timePerSequence / totalSteps
     const isSequencePlaying = startTime !== null
@@ -49,7 +49,7 @@ function App() {
     }
 
     const playHeadProps = {
-        notesAreaWidthInPixels,
+        // notesAreaWidthInPixels,
         timePerSequence,
         totalLapsedTime
     }
@@ -59,19 +59,17 @@ function App() {
     }
 
     return (
-        <Provider>
             <main className="app">
                 <header className="app_header">
                     <h1 className="app_title">LILY-808</h1>
-                    <ToolBar {...toolBarProps} />
+                    {/* <ToolBar {...toolBarProps} /> */}
                 </header>
                 <Pads count={totalSteps} />
-                <div className="app_content">
+                {/* <div className="app_content">
                     <PlayHead {...playHeadProps} />
                     <TrackList {...trackListProps} />
-                </div>
+                </div> */}
             </main >
-        </Provider>
     )
 }
 
