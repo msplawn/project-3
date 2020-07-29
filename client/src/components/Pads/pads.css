@@ -16,7 +16,7 @@
     font-size: 1rem;
     background-color: gray;
     border: black 2px solid;
-    background: url("../../assets/lilypad.png");
+    background: url("../../assets/lilypad2.png");
     background-position: center; /* Center the image */
     background-size: cover;
 }
