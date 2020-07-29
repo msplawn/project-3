@@ -1,9 +1,24 @@
 .pads {
     display: flex;
+    flex-direction: row;
     padding-left: var(--left-gutter-size);
     border-top: 1px solid var(--color-dark-grey);
     border-bottom: 1px solid var(--color-dark-grey);
 }
+
+/* .outerpad{
+    display: flex;
+    flex: 0 0 var(--note-width);
+    width: 100px;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+    font-weight: 900;
+    font-size: 1rem;
+    background-color: gray;
+    border: black 2px solid; */
+
+/* } */
 
 .pad {
     display: flex;
@@ -17,8 +32,14 @@
     background-color: gray;
     border: black 2px solid;
     background: url("../../assets/lilypad2.png");
-    background-position: center; /* Center the image */
+    background-position: center;
+    /* Center the image */
     background-size: cover;
+}
+
+.clicked {
+    -webkit-filter: brightness(0.5);
+    filter: brightness(0.5);
 }
 
 .voiceRow {
