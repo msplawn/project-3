@@ -10,12 +10,12 @@ import useTimer from './hooks/useTimer'
 
 function App() {
 
-    // const baseBPMPerOneSecond = 60
-    // const stepsPerBar = 16
-    // const beatsPerBar = 4
-    // const barsPerSequence = 1
-    // const totalSteps = stepsPerBar * barsPerSequence
-    // const totalBeats = beatsPerBar * barsPerSequence
+    const baseBPMPerOneSecond = 60
+    const stepsPerBar = 16
+    const beatsPerBar = 4
+    const barsPerSequence = 1
+    const totalSteps = stepsPerBar * barsPerSequence
+    const totalBeats = beatsPerBar * barsPerSequence
 
     const [BPM, setBPM] = useState(128)
     const [startTime, setStartTime] = useState(null)
@@ -24,8 +24,8 @@ function App() {
     // const [getNotesAreaWidthInPixels] = useStyles(totalSteps)
 
     // const notesAreaWidthInPixels = getNotesAreaWidthInPixels(totalSteps)
-    const timePerSequence = baseBPMPerOneSecond / BPM * 1000 * totalBeats
-    const timePerStep = timePerSequence / totalSteps
+    // const timePerSequence = baseBPMPerOneSecond / BPM * 1000 * totalBeats
+    // const timePerStep = timePerSequence / totalSteps
     const isSequencePlaying = startTime !== null
     const playerTime = useTimer(isSequencePlaying)
     const lapsedTime = isSequencePlaying ? Math.max(0, playerTime - startTime) : 0
@@ -52,7 +52,7 @@ function App() {
 
     const playHeadProps = {
         // notesAreaWidthInPixels,
-        timePerSequence,
+        // timePerSequence,
         totalLapsedTime
     }
 
@@ -64,7 +64,7 @@ function App() {
             <main className="app">
                 <header className="app_header">
                     <h1 className="app_title">LILY-808</h1>
-                    <ToolBar {...toolBarProps} />
+                    <ToolBar />
                 </header>
                 <Pads count={totalSteps} />
                 {/* <div className="app_content">
