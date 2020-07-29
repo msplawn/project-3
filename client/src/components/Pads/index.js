@@ -40,6 +40,7 @@ const Pads = ({ count = 0 }) => {
         setSoundData(tempData);
     };
 
+    
     if (soundData.length)   {
         return (
             <div>
