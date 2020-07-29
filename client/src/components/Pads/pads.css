@@ -1,0 +1,27 @@
+.pads {
+    display: flex;
+    padding-left: var(--left-gutter-size);
+    border-top: 1px solid var(--color-dark-grey);
+    border-bottom: 1px solid var(--color-dark-grey);
+}
+
+.pad {
+    display: flex;
+    flex: 0 0 var(--note-width);
+    width: 100px;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+    font-weight: 900;
+    font-size: 1rem;
+    background-color: gray;
+    border: black 2px solid;
+    background: url("../../assets/lilypad.png");
+    background-position: center; /* Center the image */
+    background-size: cover;
+}
+
+.voiceRow {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

@@ -1,14 +1,12 @@
-import React from "react";
-// import React, { useState, useEffect } from 'react'
-import ToolBar from './components/Tools';
-// import { Toolbar } from '@material-ui/core'
-// import Pads from './components/Pads'
+import React, { useState, useEffect } from 'react'
+import ToolBar from './components/Tools'
+import Pads from './components/Pads'
 // import TrackList from './components/TrackList'
 // import PlayHead from './components/PlayHead'
 // import { Provider } from './hooks/useStore'
-// import useTimer from './hooks/useTimer'
+import useTimer from './hooks/useTimer'
 // import useStyles from './hooks/useStyles'
-// import './App.css'
+// import './app.css'
 
 function App() {
 
@@ -19,19 +17,20 @@ function App() {
     // const totalSteps = stepsPerBar * barsPerSequence
     // const totalBeats = beatsPerBar * barsPerSequence
 
-    // const [BPM, setBPM] = useState(128)
-    // const [startTime, setStartTime] = useState(null)
-    // const [pastLapsedTime, setPastLapse] = useState(0)
-    // const [currentStepID, setCurrentStep] = useState(null)
+    const [BPM, setBPM] = useState(128)
+    const [startTime, setStartTime] = useState(null)
+    const [pastLapsedTime, setPastLapse] = useState(0)
+    const [currentStepID, setCurrentStep] = useState(null)
     // const [getNotesAreaWidthInPixels] = useStyles(totalSteps)
 
     // const notesAreaWidthInPixels = getNotesAreaWidthInPixels(totalSteps)
-    // const timePerSequence = baseBPMPerOneSecond / BPM * 1000 * totalBeats
-    // const timePerStep = timePerSequence / totalSteps
-    // const isSequencePlaying = startTime !== null
-    // const playerTime = useTimer(isSequencePlaying)
-    // const lapsedTime = isSequencePlaying ? Math.max(0, playerTime - startTime) : 0
-    // const totalLapsedTime = pastLapsedTime + lapsedTime
+    const timePerSequence = baseBPMPerOneSecond / BPM * 1000 * totalBeats
+    const timePerStep = timePerSequence / totalSteps
+    const isSequencePlaying = startTime !== null
+    const playerTime = useTimer(isSequencePlaying)
+    const lapsedTime = isSequencePlaying ? Math.max(0, playerTime - startTime) : 0
+    const totalLapsedTime = pastLapsedTime + lapsedTime
+
 
     // useEffect(() => {
     //     if (isSequencePlaying) {
@@ -50,35 +49,30 @@ function App() {
     //     BPM
     // }
 
-    // const playHeadProps = {
-    //     notesAreaWidthInPixels,
-    //     timePerSequence,
-    //     totalLapsedTime
-    // }
+
+    const playHeadProps = {
+        // notesAreaWidthInPixels,
+        timePerSequence,
+        totalLapsedTime
+    }
 
     // const trackListProps = {
     //     currentStepID
     // }
 
     return (
-       
-<ToolBar />
+            <main className="app">
+                <header className="app_header">
+                    <h1 className="app_title">LILY-808</h1>
+                    <ToolBar {...toolBarProps} />
+                </header>
+                <Pads count={totalSteps} />
+                {/* <div className="app_content">
+                    <PlayHead {...playHeadProps} />
+                    <TrackList {...trackListProps} />
+                </div> */}
+            </main >
 
-
-       
-        // <Provider>
-        //     <main className="app">
-        //         <header className="app_header">
-        //             <h1 className="app_title">LILY-808</h1>
-                    // <ToolBar {...toolBarProps} />
-        //         </header>
-        //         <Pads count={totalSteps} />
-        //         <div className="app_content">
-        //             <PlayHead {...playHeadProps} />
-        //             <TrackList {...trackListProps} />
-        //         </div>
-        //     </main >
-        // </Provider>
     )
 }
 
