@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import ToolBar from './components/Tools'
-import Pads from './components/Pads'
+import React, { useState, useEffect } from 'react';
+import ToolBar from './components/Tools';
+import Pads from './components/Pads';
 // import TrackList from './components/TrackList'
 // import PlayHead from './components/PlayHead'
 // import { Provider } from './hooks/useStore'
-import useTimer from './hooks/useTimer'
+import useTimer from './hooks/useTimer';
 // import useStyles from './hooks/useStyles'
 import './app.css'
 import Frog from './assets/cutiefrog.png'
@@ -73,10 +73,9 @@ function App() {
                     <PlayHead {...playHeadProps} />
                     <TrackList {...trackListProps} />
                 </div> */}
-      <footer>
 
       </footer>
-    </main >
+    </main>
 
   )
 }
