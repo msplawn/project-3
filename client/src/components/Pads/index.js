@@ -44,8 +44,7 @@ const Pads = ({ count = 0 }) => {
         const player = new Player(process.env.PUBLIC_URL + "/sounds/" + sound + ".wav").toDestination();
                 loaded().then(() => {
                     player.start();
-                });
-        
+                }); 
     }
 
 
