@@ -16,7 +16,12 @@
     background-color: var(--color-bg);
     padding: 20px;
   } */
-
+  .app {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: rgb(121, 255, 192);
+  }
   .app_header {
     display: flex;
     flex-direction: column;
@@ -35,6 +40,14 @@
   #frog {
       width: 300px;
       margin-bottom: 20px;
+  }
+
+  .main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 5px 10px 10px gray;
+    width: 1600px;
   }
   
   /* @media only screen and (min-width: 820px) {

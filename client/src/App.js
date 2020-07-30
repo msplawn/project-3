@@ -65,17 +65,22 @@ function App() {
     <main className="app">
       <header className="app_header">
         <h1 className="app_title">The Lily Pad</h1>
-        <img src={process.env.PUBLIC_URL + "/cutiefrog.png"} id="frog"/>
+        <img src={process.env.PUBLIC_URL + "/cutiefrog.png"} id="frog" />
       </header>
-      <ToolBar />
-      <Pads count={totalSteps} />
-      {/* <div className="app_content">
+      <section className="main">
+        <ToolBar />
+        <Pads count={totalSteps} />
+        {/* <div className="app_content">
                     <PlayHead {...playHeadProps} />
                     <TrackList {...trackListProps} />
                 </div> */}
 
-      </footer>
-    </main>
+      </section>
+      {/* <footer>
+
+      </footer> */}
+    </main >
+
 
   )
 }
