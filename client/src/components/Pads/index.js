@@ -56,7 +56,7 @@ const Pads = ({ count = 0 }) => {
                         <TableHead >
                             <TableRow >
                                 <TableCell align="right" >Sound</TableCell>
-                                {soundData[0].steps.map(item => <TableCell align="center" key={item.id} >{item.id}</TableCell>)};
+                                {soundData[0].steps.map(item => <TableCell align="center" key={item.id} >{item.id}</TableCell>)}
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -67,7 +67,7 @@ const Pads = ({ count = 0 }) => {
                                     </TableCell>
                                     {row.steps.map(item => <TableCell align="center" className={`pad ${item.active ? "clicked" : ""}`}
                                         key={`${row.sound}-${item.id}`}
-                                        onClick={(e) => handleClick(e, row.sound, item.id)}></TableCell>)};
+                                        onClick={(e) => handleClick(e, row.sound, item.id)}></TableCell>)}
 
                                 </TableRow>
                             ))}
