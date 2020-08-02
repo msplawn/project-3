@@ -31,12 +31,11 @@
     font-size: 1rem;
     background-color: gray;
     border: black 2px solid;
-    background: url("../../assets/lilypad2.png");
+    background: url("../../assets/lilypad2.png") no-repeat;
     background-position: center;
     /* Center the image */
-    background-size: cover;
+    background-size: 100%;
 }
-
 .clicked {
     -webkit-filter: brightness(0.5);
     filter: brightness(0.5);
