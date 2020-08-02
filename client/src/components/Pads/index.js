@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Box, Grid, Button, Select, Table, TableBody, TableCell, TableContainer, TableRow, TableHead, Paper, makeStyles } from "@material-ui/core";
 import "./pads.css";
 import { Player, loaded } from "tone";
+//import jQuery from 'jquery'
+const $ = window.$;
 // import Sequences from "../../../../models/index"
 // import Sounds from "../../../public/sounds"
 console.log(Player);
@@ -37,6 +39,14 @@ const Pads = ({ count = 0 }) => {
         setSoundData(tempData);
         // console.log(sound)
         SampleClick(sound)
+
+        var note = {
+            beat: sound,
+            song_id: id
+          };
+          console.log(note);
+          
+          
     };
 
     const SampleClick = (sound) => {
