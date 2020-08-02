@@ -42,12 +42,12 @@
       margin-bottom: 20px;
   }
 
-  .main {
-    display: flex;
+  .interface {
+    /* display: flex; */
     flex-direction: column;
     justify-content: center;
     box-shadow: 5px 10px 10px gray;
-    width: 1600px;
+    margin-left: 20px;
   }
   
   /* @media only screen and (min-width: 820px) {
