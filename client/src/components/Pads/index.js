@@ -3,11 +3,13 @@ import { Box, Grid, Button, Select, Table, TableBody, TableCell, TableContainer,
 import "./pads.css";
 
 const Pads = ({ soundData, handleClick }) => {
+
     const useStyles = makeStyles({
         table: {
             minWidth: 650,
         },
     });
+
 
     if (soundData.length) {
         return (
