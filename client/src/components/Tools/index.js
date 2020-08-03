@@ -112,7 +112,9 @@ const Tools = ({
     <div>
 
       <CssBaseline />
-      <Box>
+      <Grid container>
+      <Grid item xs={12}>
+     
         <Grid container justify="center">
           <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
             <Toolbar className={classes.toolbar}>
@@ -144,7 +146,8 @@ const Tools = ({
             </Toolbar>
           </AppBar>
         </Grid>
-      </Box>
+      </Grid>
+      </Grid>
     </div>
   );
 };
