@@ -21,6 +21,7 @@
       flex-direction: column;
       justify-content: center;
       background-color: rgb(121, 255, 192);
+      font-family: 'Sigmar One', cursive;
       
   }
   .app_header {
@@ -37,6 +38,7 @@
   .app_title   {
       font-size: 80px;
       color: purple;
+      
   }
   #frog {
       width: 300px;
@@ -98,6 +100,7 @@
     justify-content: center;
     box-shadow: 5px 10px 10px gray;
     width: 1600px;
+    
   }
   @media only screen and (max-width: 600px) and (max-width: 812px) {
     .main {
