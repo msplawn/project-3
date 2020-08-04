@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Box,
@@ -63,10 +63,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Tools = ({
-  initialBPM,
-  soundData
+  BPM,
+  setBPM,
+  soundData,
+  initialBpm
 }) => {
-
+  useEffect(() => {
+    const beats = BPM || initialBpm;
+    Transport.bpm.rampTo(beats, 1);
+  },[BPM])
   // const [currentStep, setCurrentStep] = useState(0);
 
   const classes = useStyles();
@@ -79,10 +84,7 @@ const Tools = ({
     const playerSnare = new Player(process.env.PUBLIC_URL + "/sounds/Snare.wav").toDestination();
     const playerKick = new Player(process.env.PUBLIC_URL + "/sounds/Kick.wav").toDestination();
 
-
-    
     if (!on) {
-      
       let currentStep = 0;
       const loop = new Loop(
         function (time) {
@@ -126,7 +128,6 @@ const Tools = ({
         },
         "8n"
       ).start(0);
-      Transport.bpm.value = 150
       Transport.start();
     } else {
       loaded().then(() => {
@@ -138,16 +139,8 @@ const Tools = ({
       })
       Transport.stop();
       Transport.cancel();
-      
     } 
   };
-
-  
-
-  const [bpm, sets] = useState(initialBPM);
-  const setBpm = e => sets(e.target.value);
-
-
 
   return (
 
@@ -166,7 +159,9 @@ const Tools = ({
               <Button id="play-button" variant="outlined" className={classes.button} on={on} onClick={play}>
                 {on ? <StopIcon /> : <PlayArrowIcon />}
               </Button>
-              <TextField type="number" value={bpm} min={60} max={200} onChange={Transport.bpm} variant="outlined" className={classes.bpm} label="BPM"/>
+
+              <TextField type="number" placeholder={initialBpm} min={60} max={200} onChange={(e) => setBPM(e.currentTarget.value)} variant="outlined" className={classes.bpm} label="BPM" />
+
               <FormControl variant="outlined" className={classes.formControl}>
                 <InputLabel id="">Sequence</InputLabel>
                 <Select
