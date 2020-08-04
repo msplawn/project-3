@@ -17,7 +17,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { Transport, Loop, Sequence, Player, loaded } from "tone";
+import { Transport, Loop, Sequence, Player, loaded, FMSynth } from "tone";
 
 
 //STYLES
@@ -73,35 +73,71 @@ const Tools = ({
   const [on, set] = useState(false);
   const play = () => {
     set(!on);
-    const player = new Player(process.env.PUBLIC_URL + "/sounds/Closed-Hat.wav").toDestination();
+    console.log("SOUNDDATA", soundData)
+    const playerClosedHat = new Player(process.env.PUBLIC_URL + "/sounds/Closed-Hat.wav").toDestination();
+    const playerOpenHat = new Player(process.env.PUBLIC_URL + "/sounds/Open-Hat.wav").toDestination();
+    const playerSnare = new Player(process.env.PUBLIC_URL + "/sounds/Snare.wav").toDestination();
+    const playerKick = new Player(process.env.PUBLIC_URL + "/sounds/Kick.wav").toDestination();
+
+
+    
     if (!on) {
+      
       let currentStep = 0;
       const loop = new Loop(
         function (time) {
           console.log(currentStep, soundData[0].steps.length);
+          // ------------ Closed Hat ----------------
           if (currentStep === soundData[0].steps.length - 1)  {
             currentStep = 0;
           } else {
-            console.log("ELSE");
             currentStep = currentStep + 1;
-            console.log("CURRENTSTEP + 1", currentStep + 1);
           }; 
           if (soundData[0].steps[currentStep].active) {
             loaded().then(() => {
-              player.seek(0);
-              player.start();
+              playerClosedHat.seek(0);
+              playerClosedHat.start();
+            });
+          };
+
+          // ------------ Open Hat ----------------
+          if (soundData[1].steps[currentStep].active) {
+            loaded().then(() => {
+              playerOpenHat.seek(0);
+              playerOpenHat.start();
+            });
+          };
+
+          // ------------ Snare ----------------
+          if (soundData[2].steps[currentStep].active) {
+            loaded().then(() => {
+              playerSnare.seek(0);
+              playerSnare.start();
+            });
+          };
+
+          // ------------ Kick ----------------
+          if (soundData[3].steps[currentStep].active) {
+            loaded().then(() => {
+              playerKick.seek(0);
+              playerKick.start();
             });
           };
         },
-        "4n"
+        "8n"
       ).start(0);
+      Transport.bpm.value = 150
       Transport.start();
     } else {
       loaded().then(() => {
-        player.stop();
+        playerClosedHat.stop();
+        playerOpenHat.stop();
+        playerSnare.stop();
+        playerKick.stop();
+
       })
       Transport.stop();
-    }
+    } 
   };
 
   const [bpm, sets] = useState(initialBPM);
