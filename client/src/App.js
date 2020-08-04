@@ -1,22 +1,26 @@
-import React, { useState, useEffect } from 'react'
-import ToolBar from './components/Tools'
-import Pads from './components/Pads'
+import React, { useState, useEffect } from 'react';
+import ToolBar from './components/Tools';
+import Pads from './components/Pads';
 import { Player, loaded } from "tone";
-// import TrackList from './components/TrackList'
-// import PlayHead from './components/PlayHead'
-// import { Provider } from './hooks/useStore'
-import useTimer from './hooks/useTimer'
-// import useStyles from './hooks/useStyles'
-import './app.css'
-import Frog from './assets/cutiefrog.png'
+import './app.css';
+import useDebounce from './hooks/useDebounce';
+import { initial } from 'lodash';
 
 function App() {
-  const [soundData, setSoundData] = useState([])
+  const [soundData, setSoundData] = useState([]);
+  const stepsPerBar = 16;
+  const barsPerSequence = 1;
+  const totalSteps = stepsPerBar * barsPerSequence;
+  const [BPM, setBPM] = useState(null);
+  const [config, setConfig] = useState({
+    bpm: null
+  });
+  const updatedBpm = useDebounce(BPM);
+  const initialBpm = 128;
 
   useEffect(() => {
     const sounds = ['Closed-Hat', 'Open-Hat', 'Snare', 'Kick'];
     const steps = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
-
     const rows = sounds.map(sound => (
       {
         sound,
@@ -25,6 +29,14 @@ function App() {
     ));
     setSoundData(rows);
   }, []);
+
+  useEffect(() => {
+    setConfig({ bpm: updatedBpm });
+  },[updatedBpm]);
+
+   const handleBpmChange = (value) => {
+      setBPM(value);
+   };
 
   function handleClick(e, sound, id) {
     e.preventDefault();
@@ -45,56 +57,6 @@ function App() {
     });
   }
 
-  const baseBPMPerOneSecond = 60
-  const stepsPerBar = 16
-  const beatsPerBar = 4
-  const barsPerSequence = 1
-  const totalSteps = stepsPerBar * barsPerSequence
-  const totalBeats = beatsPerBar * barsPerSequence
-
-  const [BPM, setBPM] = useState(128)
-  const [startTime, setStartTime] = useState(null)
-  const [pastLapsedTime, setPastLapse] = useState(0)
-  const [currentStepID, setCurrentStep] = useState(null)
-  // const [getNotesAreaWidthInPixels] = useStyles(totalSteps)
-
-  // const notesAreaWidthInPixels = getNotesAreaWidthInPixels(totalSteps)
-  // const timePerSequence = baseBPMPerOneSecond / BPM * 1000 * totalBeats
-  // const timePerStep = timePerSequence / totalSteps
-  const isSequencePlaying = startTime !== null
-  const playerTime = useTimer(isSequencePlaying)
-  const lapsedTime = isSequencePlaying ? Math.max(0, playerTime - startTime) : 0
-  const totalLapsedTime = pastLapsedTime + lapsedTime
-
-
-  // useEffect(() => {
-  //     if (isSequencePlaying) {
-  //         setCurrentStep(Math.floor(totalLapsedTime / timePerStep) % totalSteps)
-  //     } else {
-  //         setCurrentStep(null)
-  //     }
-  // }, [isSequencePlaying, timePerStep, totalLapsedTime, totalSteps])
-
-  // const toolBarProps = {
-  //     setStartTime,
-  //     setPastLapse,
-  //     setBPM,
-  //     isSequencePlaying,
-  //     startTime,
-  //     BPM
-  // }
-
-
-  const playHeadProps = {
-    // notesAreaWidthInPixels,
-    // timePerSequence,
-    totalLapsedTime
-  }
-
-  // const trackListProps = {
-  //     currentStepID
-  // }
-
   return (
     <main className="app">
       <header className="app_header">
@@ -104,17 +66,17 @@ function App() {
       <div className="interface">
         <ToolBar 
           soundData={soundData}
+          setBPM={handleBpmChange}
+          BPM={config.bpm}
+          initialBpm={initialBpm}
         />
         <Pads 
           count={totalSteps} 
           handleClick={handleClick} 
           soundData={soundData}
+          BPM={BPM}
         />
       </div>
-      {/* <div className="app_content">
-                    <PlayHead {...playHeadProps} />
-                    <TrackList {...trackListProps} />
-                </div> */}
       <footer>
 
       </footer>
