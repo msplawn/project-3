@@ -142,8 +142,6 @@ const Tools = ({
     } 
   };
 
-  
-
   return (
 
     <div>
@@ -155,13 +153,15 @@ const Tools = ({
         <Grid container justify="center">
           <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
             <Toolbar className={classes.toolbar}>
-              <Typography variant="h4" color="inherit" noWrap className={classes.toolbarTitle}>
+              <Typography variant="h4" color="inherit" id="tool-title" noWrap className={classes.toolbarTitle}>
                 LILY-808
           </Typography>
-              <Button variant="outlined" className={classes.button} on={on} onClick={play}>
+              <Button id="play-button" variant="outlined" className={classes.button} on={on} onClick={play}>
                 {on ? <StopIcon /> : <PlayArrowIcon />}
               </Button>
+
               <TextField type="number" placeholder={initialBpm} min={60} max={200} onChange={(e) => setBPM(e.currentTarget.value)} variant="outlined" className={classes.bpm} label="BPM" />
+
               <FormControl variant="outlined" className={classes.formControl}>
                 <InputLabel id="">Sequence</InputLabel>
                 <Select

@@ -18,9 +18,10 @@ import "./pads.css";
 const Pads = ({ soundData, handleClick }) => {
   const useStyles = makeStyles({
     table: {
-      minWidth: 650,
+      minWidth: 150,
     },
   });
+  const classes = useStyles();
 
   if (soundData.length) {
     return (

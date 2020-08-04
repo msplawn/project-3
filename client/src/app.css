@@ -17,108 +17,126 @@
     padding: 20px;
   } */
   .app {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      background-color: rgb(121, 255, 192);
-      font-family: 'Sigmar One', cursive;
-      
-  }
-  .app_header {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    text-align: center;
-    margin-bottom: calc(var(--spacer) * 1);
-    margin-left: var(--spacer);
-    margin-right: var(--spacer);
-  } 
+    background-color: rgb(121, 255, 192);
+    font-family: 'Sigmar One', cursive;
+    
+}
+.app_header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: calc(var(--spacer) * 1);
+  margin-left: var(--spacer);
+  margin-right: var(--spacer);
+} 
 
-  .app_title   {
-      font-size: 80px;
-      color: purple;
-      
-  }
-  #frog {
-      width: 300px;
-      margin-bottom: 20px;
-  }
+.app_title   {
+    font-size: 80px;
+    color: purple;
+    text-shadow: 2px 2px 4px #000000;
+    
+}
+#frog {
+    width: 300px;
+    margin-bottom: 20px;
+}
 
-  .interface {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    box-shadow: 5px 10px 10px gray;
-    margin: 20px;
-    /* margin-left: 20px; */
-  }
+.interface {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 5px 10px 10px gray;
+  margin: 20px;
+ 
+  /* margin-left: 20px; */
+}
+
+#tool-title {
+  font-family: 'Sigmar One', cursive;
+  text-shadow: 1px 1px 2px #000000;
   
-  /* @media only screen and (min-width: 820px) {
-    .app {
-      margin-top: var(--spacer);
-      margin-bottom: var(--spacer);
-    }
-  }
+}
+
+#play-button {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   
-  .app_header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin-bottom: calc(var(--spacer) * 1);
-    margin-left: var(--spacer);
-    margin-right: var(--spacer);
-  }
-  
-  .app_title {
-    font-size: 2.2rem;
-    font-weight: 900;
-    flex: 1;
-  }
-  
-  .app_content {
-    display: flex;
-    flex-direction: column;
+}
+
+#play-button:hover {
+  background-color: rgb(216, 43, 101); 
+  color: white;
+}
+
+/* @media only screen and (min-width: 820px) {
+  .app {
     margin-top: var(--spacer);
     margin-bottom: var(--spacer);
-    position: relative;
-    transform: translateZ(0);
   }
-  
-  .app_footer,
-  .app_footer a {
-    margin-top: 4vh;
-    text-align: center;
-    color: var(--color-dark-grey);
-    background: transparent;
-  } */
+}
 
+.app_header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: calc(var(--spacer) * 1);
+  margin-left: var(--spacer);
+  margin-right: var(--spacer);
+}
+
+.app_title {
+  font-size: 2.2rem;
+  font-weight: 900;
+  flex: 1;
+}
+
+.app_content {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--spacer);
+  margin-bottom: var(--spacer);
+  position: relative;
+  transform: translateZ(0);
+}
+
+.app_footer,
+.app_footer a {
+  margin-top: 4vh;
+  text-align: center;
+  color: var(--color-dark-grey);
+  background: transparent;
+} */
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 5px 10px 10px gray;
+  width: 1600px;
+  
+}
+@media only screen and (min-width: 600px) and (max-width: 812px) {
   .main {
     display: flex;
     flex-direction: column;
     justify-content: center;
     box-shadow: 5px 10px 10px gray;
-    width: 1600px;
-    
+    width: 200px;
+   
   }
-  @media only screen and (max-width: 600px) and (max-width: 812px) {
-    .main {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      box-shadow: 5px 10px 10px gray;
-      width: 200px;
-     
-    }
+}
+@media screen and (max-width: 1024px) {
+  #frog { 
+    width: 150px;
+    margin-bottom: 20px;
   }
-  @media screen and (max-width: 1024px) {
-    #frog { 
-      width: 150px;
-      margin-bottom: 20px;
-    }
-    .app_title {
-      font-size: 30px;
-      color: purple;
-    }
+  .app_title {
+    font-size: 30px;
+    color: purple;
   }
+}
