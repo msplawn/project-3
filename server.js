@@ -3,7 +3,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 const PORT = process.env.PORT || 3001;
 const app = express();
-const apiRoutes = require("./routes/apiRoutes");
+const apiRoutes = require("./config/routes");
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === "production") {
 
 // Connect to the Mongo DB
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/reactrecipes",
+  process.env.MONGODB_URI || "mongodb://localhost/beats",
   { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
 );
 

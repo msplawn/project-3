@@ -1,3 +1,4 @@
 module.exports = {
-  Recipe: require("./recipe")
+  Sound: require("./sound")
 };
+
