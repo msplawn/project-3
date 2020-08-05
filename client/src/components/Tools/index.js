@@ -158,7 +158,7 @@ const Tools = ({
                 <Typography variant="h4" color="inherit" id="tool-title" noWrap className={classes.toolbarTitle}>
                   LILY-808
           </Typography>
-                <Button variant="outlined" className={classes.button} on={on} onClick={download}>
+                <Button id="play-button" variant="outlined" className={classes.button} on={on} onClick={download}>
                   <SaveIcon />
                 </Button>
                 <Button id="play-button" variant="outlined" className={classes.button} on={on} onClick={play}>
@@ -166,9 +166,9 @@ const Tools = ({
                   {on ? <StopIcon /> : <PlayArrowIcon />}
                 </Button>
 
-                <TextField type="number" placeholder={initialBpm} min={60} max={200} onChange={(e) => setBPM(e.currentTarget.value)} variant="outlined" className={classes.bpm} label="BPM" />
+                <TextField id="bpm" type="number" placeholder={initialBpm} min={60} max={200} onChange={(e) => setBPM(e.currentTarget.value)} variant="outlined" className={classes.bpm} label="BPM" />
 
-                <FormControl variant="outlined" className={classes.formControl}>
+                <FormControl id="sequencer" variant="outlined" className={classes.formControl}>
                   <InputLabel id="">Sequence</InputLabel>
                   <Select
                     label="Sequence"
