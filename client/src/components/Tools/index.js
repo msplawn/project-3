@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Box,
@@ -10,14 +10,17 @@ import {
   Grid,
 } from "@material-ui/core";
 import { Types } from "mongoose";
-import StopIcon from "@material-ui/icons/Stop";
-import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import StopIcon from '@material-ui/icons/Stop';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import SaveIcon from '@material-ui/icons/Save';
+import { makeStyles } from "@material-ui/core/styles";
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import CssBaseline from '@material-ui/core/CssBaseline';
+
 import { Transport, Loop, Sequence, Player, loaded, FMSynth } from "tone";
 import { purple } from "@material-ui/core/colors";
 
@@ -63,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 //Custom styling for element
 const InputField = withStyles({
   root: {
@@ -86,69 +90,75 @@ const InputField = withStyles({
   },
 })(TextField);
 
-const Tools = ({ initialBPM, soundData }) => {
+const Tools = ({
+  BPM,
+  setBPM,
+  soundData,
+  initialBpm
+}) => {
+  useEffect(() => {
+    const beats = BPM || initialBpm;
+    Transport.bpm.rampTo(beats, 1);
+  },[BPM])
+
   // const [currentStep, setCurrentStep] = useState(0);
 
   const classes = useStyles();
   const [on, set] = useState(false);
   const play = () => {
     set(!on);
-    console.log("SOUNDDATA", soundData);
-    const playerClosedHat = new Player(
-      process.env.PUBLIC_URL + "/sounds/Closed-Hat.wav"
-    ).toDestination();
-    const playerOpenHat = new Player(
-      process.env.PUBLIC_URL + "/sounds/Open-Hat.wav"
-    ).toDestination();
-    const playerSnare = new Player(
-      process.env.PUBLIC_URL + "/sounds/Snare.wav"
-    ).toDestination();
-    const playerKick = new Player(
-      process.env.PUBLIC_URL + "/sounds/Kick.wav"
-    ).toDestination();
+
+    console.log("SOUNDDATA", soundData)
+    const playerClosedHat = new Player(process.env.PUBLIC_URL + "/sounds/Closed-Hat.wav").toDestination();
+    const playerOpenHat = new Player(process.env.PUBLIC_URL + "/sounds/Open-Hat.wav").toDestination();
+    const playerSnare = new Player(process.env.PUBLIC_URL + "/sounds/Snare.wav").toDestination();
+    const playerKick = new Player(process.env.PUBLIC_URL + "/sounds/Kick.wav").toDestination();
 
     if (!on) {
       let currentStep = 0;
-      const loop = new Loop(function (time) {
-        console.log(currentStep, soundData[0].steps.length);
-        // ------------ Closed Hat ----------------
-        if (currentStep === soundData[0].steps.length - 1) {
-          currentStep = 0;
-        } else {
-          currentStep = currentStep + 1;
-        }
-        if (soundData[0].steps[currentStep].active) {
-          loaded().then(() => {
-            playerClosedHat.seek(0);
-            playerClosedHat.start();
-          });
-        }
+      const loop = new Loop(
+        function (time) {
+          console.log(currentStep, soundData[0].steps.length);
+          // ------------ Closed Hat ----------------
+          if (currentStep === soundData[0].steps.length - 1)  {
+            currentStep = 0;
+          } else {
+            currentStep = currentStep + 1;
+          }; 
+          if (soundData[0].steps[currentStep].active) {
+            loaded().then(() => {
+              playerClosedHat.seek(0);
+              playerClosedHat.start();
+            });
+          };
 
-        // ------------ Open Hat ----------------
-        if (soundData[1].steps[currentStep].active) {
-          loaded().then(() => {
-            playerOpenHat.seek(0);
-            playerOpenHat.start();
-          });
-        }
+          // ------------ Open Hat ----------------
+          if (soundData[1].steps[currentStep].active) {
+            loaded().then(() => {
+              playerOpenHat.seek(0);
+              playerOpenHat.start();
+            });
+          };
 
-        // ------------ Snare ----------------
-        if (soundData[2].steps[currentStep].active) {
-          loaded().then(() => {
-            playerSnare.seek(0);
-            playerSnare.start();
-          });
-        }
+          // ------------ Snare ----------------
+          if (soundData[2].steps[currentStep].active) {
+            loaded().then(() => {
+              playerSnare.seek(0);
+              playerSnare.start();
+            });
+          };
 
-        // ------------ Kick ----------------
-        if (soundData[3].steps[currentStep].active) {
-          loaded().then(() => {
-            playerKick.seek(0);
-            playerKick.start();
-          });
-        }
-      }, "8n").start(0);
-      Transport.bpm.value = 150;
+          // ------------ Kick ----------------
+          if (soundData[3].steps[currentStep].active) {
+            loaded().then(() => {
+              playerKick.seek(0);
+              playerKick.start();
+            });
+          };
+        },
+        "8n"
+      ).start(0);
+
       Transport.start();
     } else {
       loaded().then(() => {
@@ -159,11 +169,9 @@ const Tools = ({ initialBPM, soundData }) => {
       });
       Transport.stop();
       Transport.cancel();
-    }
-  };
 
-  const [bpm, sets] = useState(initialBPM);
-  const setBpm = (e) => sets(e.target.value);
+    } 
+  };
 
   return (
     <div>
@@ -184,6 +192,7 @@ const Tools = ({ initialBPM, soundData }) => {
                   id="tool-title"
                   noWrap
                   className={classes.toolbarTitle}
+
                 >
                   LILY-808
                 </Typography>

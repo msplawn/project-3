@@ -1,3 +1,7 @@
+const Sequence = require("./sequence");
+
 module.exports = {
-  Recipe: require("./recipe")
+  Sound: require("./sound"),
+  Sequence: require("./sequence")
 };
+
