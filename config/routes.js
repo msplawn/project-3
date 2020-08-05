@@ -44,13 +44,14 @@ router.post('/sounds', function (req, res) {
 });
 
 const download = async function ({ body }, _, next) {
-  const path = __dirname + "/../tmp/pattern.json";
+  const path = __dirname + "/../client/public/tmp/pattern.json";
   const data = JSON.stringify(body, null, 2);
   await writeFileAsync(path, data, 'utf8');
   next();
 }
 router.post('/download', download, function(_, res){
-  const file =  __dirname + "/../tmp/pattern.json";
+  const file =  __dirname + "/../client/public/tmp/pattern.json";
+  console.log(file);
   res.download(file); // Set disposition and send it.
 });
 
