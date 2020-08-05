@@ -19,6 +19,7 @@ function App() {
   const initialBpm = 128;
   const [sequences, setSequences] = useState([]);
   const [currentSequence, setCurrentSequence] = useState({});
+  const [currentStep, setCurrentStep] = useState(0);
 
   useEffect(() => {
     axios.get("/api/sequences")
@@ -60,6 +61,10 @@ function App() {
     });
   }
 
+  const toggleClass = () => {
+    // console.log(sounds.array);
+  };
+
   return (
     <main className="app">
       <header className="app_header">
@@ -74,12 +79,14 @@ function App() {
           sequences={sequences}
           currentSequence={currentSequence}
           setCurrentSequence={setCurrentSequence}
+          setCurrentStep={setCurrentStep}
         />
         <Pads
           count={totalSteps}
           handleClick={handleClick}
           BPM={BPM}
           soundData={soundData}
+          currentStep={currentStep}
         />
       </div>
       <footer>

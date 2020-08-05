@@ -17,7 +17,6 @@
     font-weight: 900;
     font-size: 1rem;
     background-color: gray;
-    /* border: black 2px solid; */
     background: url("../../assets/lilypad2.png") no-repeat;
     background-position: center;
     background-size: 100%;
@@ -33,7 +32,7 @@
     font-weight: 900;
     font-size: 1rem;
     background-color: black;
-    border: rgb(184, 184, 184) 1px solid;
+    border: rgb(184, 184, 184) 6px outset;
     background: url("../../assets/lilypad2.png") no-repeat;
     background-position: center;
     background-size: 100%;

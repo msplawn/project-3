@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import "./pads.css";
 
-const Pads = ({ soundData, handleClick }) => {
+const Pads = ({ soundData, handleClick, currentStep }) => {
   if (soundData && soundData.length) {
     return (
       <div>
@@ -35,18 +35,22 @@ const Pads = ({ soundData, handleClick }) => {
                       <TableCell component="th" scope="row" align="right">
                         {row.label}
                       </TableCell>
-                      {row.steps.map((item) => (
-                          
+                      {row.steps.map((item, index) => {
+                          const padStyle = `pad ${item.active ? "clicked" : ""}`;
+                          const activePad = `${(index === currentStep) ? " active" : ""}`;
+                        return (
                         <TableCell
                           align="center"
-                          className={`pad ${item.active ? "clicked" : ""}`}
+                          className={padStyle + activePad}
                           key={`${row.sound}-${item.id}`}
                           onClick={(e) => handleClick(e, row.key, item.id)}
                         >
                             <div className="innerpad"></div>
                         </TableCell>
-                      ))}
+                        )
+                      })}
                     </TableRow>
+                    
                   ))}
                 </TableBody>
               </Table>
