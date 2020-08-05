@@ -50,6 +50,7 @@ const Pads = ({ soundData, handleClick, currentStep }) => {
                         )
                       })}
                     </TableRow>
+                    
                   ))}
                 </TableBody>
               </Table>
