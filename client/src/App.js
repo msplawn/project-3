@@ -4,7 +4,7 @@ import Pads from './components/Pads';
 import { Player, loaded } from "tone";
 import './app.css';
 import useDebounce from './hooks/useDebounce';
-import { initial } from 'lodash';
+import axios from 'axios';
 
 function App() {
   const [soundData, setSoundData] = useState([]);
@@ -19,15 +19,20 @@ function App() {
   const initialBpm = 128;
 
   useEffect(() => {
-    const sounds = ['Closed-Hat', 'Open-Hat', 'Snare', 'Kick'];
-    const steps = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
-    const rows = sounds.map(sound => (
-      {
-        sound,
-        steps: steps.map(step => ({ id: step }))
-      }
-    ));
-    setSoundData(rows);
+    axios.get("/api/sequences")
+    .then((result) => {
+      console.log(result);
+      setSoundData(result.data[0].sounds);
+    });
+    // const sounds = ['Closed-Hat', 'Open-Hat', 'Snare', 'Kick'];
+    // const steps = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+    // const rows = sounds.map(sound => (
+    //   {
+    //     sound,
+    //     steps: steps.map(step => ({ id: step }))
+    //   }
+    // ));
+    // setSoundData(rows);
   }, []);
 
   useEffect(() => {
