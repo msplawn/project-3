@@ -15,7 +15,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { Transport, Loop, Player, Players, loaded, start } from "tone";
+import { Transport, Loop, Players, start } from "tone";
 import axios from "axios";
 import fileDownload from 'react-file-download';
 
@@ -67,7 +67,8 @@ const Tools = ({
   initialBpm,
   sequences,
   currentSequence,
-  setCurrentSequence
+  setCurrentSequence,
+  setCurrentStep
 }) => {
   useEffect(() => {
     const beats = BPM || initialBpm;
@@ -100,8 +101,6 @@ const Tools = ({
       let currentStep = 0;
       new Loop(
         function (time) {
-          console.log(currentStep, currentSequence);
-          // ------------ Closed Hat ----------------
           if (currentStep === 15) {
             currentStep = 0;
           } else {
@@ -116,6 +115,7 @@ const Tools = ({
               });
             }
           }
+          setCurrentStep(currentStep);
         },
         "8n"
       ).start(0);

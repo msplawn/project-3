@@ -73,7 +73,7 @@
   
 }
 
-#sequence, #bpm {
+#sequencer, #bpm {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 
 }
@@ -91,6 +91,10 @@
   box-shadow: 5px 10px 10px gray;
   width: 1600px;
 
+}
+
+.active {
+  background-color: rgb(121, 255, 192);
 }
 
 @media only screen and (max-width: 600px) and (max-width: 812px) {
