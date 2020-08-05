@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
   AppBar,
-  Box,
   Button,
   Select,
   TextField,
@@ -9,16 +8,15 @@ import {
   Toolbar,
   Grid
 } from "@material-ui/core";
-import { Types } from "mongoose";
 import StopIcon from '@material-ui/icons/Stop';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SaveIcon from '@material-ui/icons/Save';
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { Transport, Loop, Sequence, Player, loaded, FMSynth } from "tone";
+import { Transport, Loop, Player, loaded, start } from "tone";
+
 
 //STYLES
 
@@ -65,20 +63,26 @@ const useStyles = makeStyles((theme) => ({
 const Tools = ({
   BPM,
   setBPM,
-  soundData,
-  initialBpm
+  initialBpm,
+  sequences,
+  currentSequence,
+  setCurrentSequence
 }) => {
   useEffect(() => {
     const beats = BPM || initialBpm;
     Transport.bpm.rampTo(beats, 1);
   },[BPM])
-  // const [currentStep, setCurrentStep] = useState(0);
+
+  useEffect(() => {
+    const item = sequences.find(item => item.name === "Sequence 1");
+    setCurrentSequence(item);
+  },[sequences])
 
   const classes = useStyles();
   const [on, set] = useState(false);
   const play = () => {
+    start();
     set(!on);
-    console.log("SOUNDDATA", soundData)
     const playerClosedHat = new Player(process.env.PUBLIC_URL + "/sounds/Closed-Hat.wav").toDestination();
     const playerOpenHat = new Player(process.env.PUBLIC_URL + "/sounds/Open-Hat.wav").toDestination();
     const playerSnare = new Player(process.env.PUBLIC_URL + "/sounds/Snare.wav").toDestination();
@@ -86,16 +90,16 @@ const Tools = ({
 
     if (!on) {
       let currentStep = 0;
-      const loop = new Loop(
+      new Loop(
         function (time) {
-          console.log(currentStep, soundData[0].steps.length);
+          console.log(currentStep, currentSequence);
           // ------------ Closed Hat ----------------
-          if (currentStep === soundData[0].steps.length - 1)  {
+          if (currentStep === currentSequence.sounds[0].steps.length - 1)  {
             currentStep = 0;
           } else {
             currentStep = currentStep + 1;
           }; 
-          if (soundData[0].steps[currentStep].active) {
+          if (currentSequence.sounds[0].steps[currentStep].active) {
             loaded().then(() => {
               playerClosedHat.seek(0);
               playerClosedHat.start();
@@ -103,7 +107,7 @@ const Tools = ({
           };
 
           // ------------ Open Hat ----------------
-          if (soundData[1].steps[currentStep].active) {
+          if (currentSequence.sounds[1].steps[currentStep].active) {
             loaded().then(() => {
               playerOpenHat.seek(0);
               playerOpenHat.start();
@@ -111,7 +115,7 @@ const Tools = ({
           };
 
           // ------------ Snare ----------------
-          if (soundData[2].steps[currentStep].active) {
+          if (currentSequence.sounds[2].steps[currentStep].active) {
             loaded().then(() => {
               playerSnare.seek(0);
               playerSnare.start();
@@ -119,7 +123,7 @@ const Tools = ({
           };
 
           // ------------ Kick ----------------
-          if (soundData[3].steps[currentStep].active) {
+          if (currentSequence.sounds[3].steps[currentStep].active) {
             loaded().then(() => {
               playerKick.seek(0);
               playerKick.start();
@@ -141,6 +145,13 @@ const Tools = ({
       Transport.stop();
       Transport.cancel();
     } 
+  };
+
+  const handleSequenceChange = (value) => {
+    console.log(value);
+    const item = sequences.find(item => item.name === value);
+    console.log(item);
+    setCurrentSequence(item);
   };
 
   return (
@@ -173,17 +184,11 @@ const Tools = ({
                 <InputLabel id="">Sequence</InputLabel>
                 <Select
                   label="Sequence"
-                  labelId=""
-                  id=""
-                  value={""}
-                  onChange={"e => selectSequence(+e.target.value)"}
-
+                  onChange={e => handleSequenceChange(e.currentTarget.value)}
                 >
-                  <MenuItem value="">
-                  </MenuItem>
-                  <MenuItem value={1}>Sequence 1</MenuItem>
-                  <MenuItem value={2}>Sequence 2</MenuItem>
-                  <MenuItem value={3}>Sequence 3</MenuItem>
+                  {sequences.map(item => {
+                    return <option value={item.name}>{item.name}</option>
+                  })}
                 </Select>
               </FormControl>
 

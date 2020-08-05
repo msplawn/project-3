@@ -11,37 +11,36 @@ function App() {
   const stepsPerBar = 16;
   const barsPerSequence = 1;
   const totalSteps = stepsPerBar * barsPerSequence;
-  const [BPM, setBPM] = useState(null);
+  const [BPM, setBPM] = useState(128);
   const [config, setConfig] = useState({
-    bpm: null
+    bpm: 128
   });
   const updatedBpm = useDebounce(BPM);
   const initialBpm = 128;
+  const [sequences, setSequences] = useState([]);
+  const [currentSequence, setCurrentSequence] = useState({});
 
   useEffect(() => {
     axios.get("/api/sequences")
-    .then((result) => {
-      console.log(result);
-      setSoundData(result.data[0].sounds);
-    });
-    // const sounds = ['Closed-Hat', 'Open-Hat', 'Snare', 'Kick'];
-    // const steps = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
-    // const rows = sounds.map(sound => (
-    //   {
-    //     sound,
-    //     steps: steps.map(step => ({ id: step }))
-    //   }
-    // ));
-    // setSoundData(rows);
+      .then((result) => {
+        console.log(result);
+        setSequences(result.data);
+      });
   }, []);
 
   useEffect(() => {
-    setConfig({ bpm: updatedBpm });
-  },[updatedBpm]);
+    if (currentSequence && currentSequence.sounds) {
+      setSoundData(currentSequence.sounds);
+    }
+  },[currentSequence]);
 
-   const handleBpmChange = (value) => {
-      setBPM(value);
-   };
+  useEffect(() => {
+    setConfig({ bpm: updatedBpm });
+  }, [updatedBpm]);
+
+  const handleBpmChange = (value) => {
+    setBPM(value);
+  };
 
   function handleClick(e, sound, id) {
     e.preventDefault();
@@ -66,20 +65,22 @@ function App() {
     <main className="app">
       <header className="app_header">
         <h1 className="app_title">The Lily Pad</h1>
-        <img src={process.env.PUBLIC_URL + "/cutiefrog.png"} id="frog" />
+        <img src={process.env.PUBLIC_URL + "/cutiefrog.png"} alt="frog" id="frog" />
       </header>
       <div className="interface">
-        <ToolBar 
-          soundData={soundData}
+        <ToolBar
           setBPM={handleBpmChange}
           BPM={config.bpm}
           initialBpm={initialBpm}
+          sequences={sequences}
+          currentSequence={currentSequence}
+          setCurrentSequence={setCurrentSequence}
         />
-        <Pads 
-          count={totalSteps} 
-          handleClick={handleClick} 
-          soundData={soundData}
+        <Pads
+          count={totalSteps}
+          handleClick={handleClick}
           BPM={BPM}
+          soundData={soundData}
         />
       </div>
       <footer>
