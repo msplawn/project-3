@@ -1,7 +1,11 @@
 const mongoose = require("mongoose");
 
 const SoundSchema = new mongoose.Schema({
-  sound: {
+  key: {
+    type: String,
+    required: true
+  },
+  label: {
     type: String,
     required: true
   },

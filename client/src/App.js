@@ -42,15 +42,14 @@ function App() {
     setBPM(value);
   };
 
-  function handleClick(e, sound, id) {
+  function handleClick(e, key, id) {
     e.preventDefault();
     const tempData = [...soundData];
-    const foundSound = tempData.find(row => row.sound === sound);
+    const foundSound = tempData.find(row => row.key === key);
     const foundStep = foundSound.steps.find(step => step.id === id);
     foundStep.active = !foundStep.active;
     setSoundData(tempData);
-    // console.log(sound)
-    sampleClick(sound)
+    sampleClick(foundSound.label);
   };
 
   const sampleClick = (sound) => {

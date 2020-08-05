@@ -31,9 +31,9 @@ const Pads = ({ soundData, handleClick }) => {
                 </TableHead>
                 <TableBody>
                   {soundData.map((row) => (
-                    <TableRow key={row.sound}>
+                    <TableRow key={row.key}>
                       <TableCell component="th" scope="row" align="right">
-                        {row.sound}
+                        {row.label}
                       </TableCell>
                       {row.steps.map((item) => (
                           
@@ -41,7 +41,7 @@ const Pads = ({ soundData, handleClick }) => {
                           align="center"
                           className={`pad ${item.active ? "clicked" : ""}`}
                           key={`${row.sound}-${item.id}`}
-                          onClick={(e) => handleClick(e, row.sound, item.id)}
+                          onClick={(e) => handleClick(e, row.key, item.id)}
                         >
                             <div className="innerpad"></div>
                         </TableCell>
