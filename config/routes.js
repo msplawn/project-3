@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const db = require('../models');
 
-router.get('/sounds', function (req, res) {
+router.get('/sequences', function (req, res) {
     // Connecting to the database.
-    db.Sound.find({})
+    db.Sequence.find({})
+    .populate('sounds')
     .then(results => {
       return res.json(results);
     })
