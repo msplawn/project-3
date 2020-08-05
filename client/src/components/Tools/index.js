@@ -20,7 +20,6 @@ import FormControl from '@material-ui/core/FormControl';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Transport, Loop, Sequence, Player, loaded, FMSynth } from "tone";
 
-
 //STYLES
 
 const useStyles = makeStyles((theme) => ({
