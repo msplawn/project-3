@@ -23,6 +23,7 @@
   justify-content: center;
   background-color: rgb(121, 255, 192);
   font-family: 'Sigmar One', cursive;
+  padding: 30px;
 }
 
 .app_header {
@@ -38,8 +39,8 @@
 
 .app_title {
   font-size: 80px;
-  color: #ce93d8;
-  text-shadow: -2px 0 #fff, 0 2px #fff, 2px 0 #fff, 0 -2px #fff;
+  color: purple;
+  text-shadow: 1px 1px 2px #000000;
 }
 
 #frog {
@@ -62,16 +63,22 @@
 #tool-title {
   font-family: 'Sigmar One', cursive;
   text-shadow: 1px 1px 2px #000000;
+  color: white;
 
   
 }
 
-#play-button {
+#play-button, #save-button {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   
 }
 
-#play-button:hover {
+#sequence, #bpm {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
+}
+
+#play-button:hover, #save-button:hover {
   background-color: rgb(216, 43, 101); 
   color: white;
 }

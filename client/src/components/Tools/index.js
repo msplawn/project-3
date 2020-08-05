@@ -158,7 +158,7 @@ const Tools = ({
                 LILY-808
           </Typography>
           <Download file="sequence.json">
-          <Button variant="outlined" className={classes.button} on={on} onClick={download}>
+          <Button variant="outlined" className={classes.button} on={on} onClick={download} id="save-button">
             <SaveIcon />
           </Button>
           </Download>
@@ -167,9 +167,9 @@ const Tools = ({
                 {on ? <StopIcon /> : <PlayArrowIcon />}
               </Button>
 
-              <TextField type="number" placeholder={initialBpm} min={60} max={200} onChange={(e) => setBPM(e.currentTarget.value)} variant="outlined" className={classes.bpm} label="BPM" />
+              <TextField type="number" placeholder={initialBpm} min={60} max={200} onChange={(e) => setBPM(e.currentTarget.value)} variant="outlined" className={classes.bpm} label="BPM" id="bpm"/>
 
-              <FormControl variant="outlined" className={classes.formControl}>
+              <FormControl variant="outlined" className={classes.formControl} id="sequence">
                 <InputLabel id="">Sequence</InputLabel>
                 <Select
                   label="Sequence"
