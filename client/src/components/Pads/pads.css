@@ -48,3 +48,15 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+@media only screen 
+and (min-device-height: 300px) 
+and (max-device-height: 700px) 
+and (orientation: landscape) {
+#table {
+    max-height: 225px;
+}
+.steps {
+    width: 100%;
+}
+}
