@@ -1,29 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
-  Box,
   Grid,
-  Button,
-  Select,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableRow,
   TableHead,
-  Paper,
-  makeStyles,
+  Paper
 } from "@material-ui/core";
 import "./pads.css";
 
 const Pads = ({ soundData, handleClick }) => {
-  const useStyles = makeStyles({
-    table: {
-      minWidth: 150,
-    },
-  });
-  const classes = useStyles();
-
-  if (soundData.length) {
+  if (soundData && soundData.length) {
     return (
       <div>
         <Grid container>
@@ -54,7 +43,7 @@ const Pads = ({ soundData, handleClick }) => {
                           key={`${row.sound}-${item.id}`}
                           onClick={(e) => handleClick(e, row.sound, item.id)}
                         >
-                            <div class="innerpad"></div>
+                            <div className="innerpad"></div>
                         </TableCell>
                       ))}
                     </TableRow>
