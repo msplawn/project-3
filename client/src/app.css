@@ -47,54 +47,35 @@
   margin-bottom: 20px;
 }
 
+
 .interface {
   display: flex;
   flex-direction: column;
   justify-content: center;
   box-shadow: 5px 10px 10px gray;
   margin: 20px;
+
+ 
   /* margin-left: 20px; */
 }
 
-/* @media only screen and (min-width: 820px) {
-    .app {
-      margin-top: var(--spacer);
-      margin-bottom: var(--spacer);
-    }
-  }
+#tool-title {
+  font-family: 'Sigmar One', cursive;
+  text-shadow: 1px 1px 2px #000000;
+
   
-  .app_header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin-bottom: calc(var(--spacer) * 1);
-    margin-left: var(--spacer);
-    margin-right: var(--spacer);
-  }
+}
+
+#play-button {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   
-  .app_title {
-    font-size: 2.2rem;
-    font-weight: 900;
-    flex: 1;
-  }
-  
-  .app_content {
-    display: flex;
-    flex-direction: column;
-    margin-top: var(--spacer);
-    margin-bottom: var(--spacer);
-    position: relative;
-    transform: translateZ(0);
-  }
-  
-  .app_footer,
-  .app_footer a {
-    margin-top: 4vh;
-    text-align: center;
-    color: var(--color-dark-grey);
-    background: transparent;
-  } */
+}
+
+#play-button:hover {
+  background-color: rgb(216, 43, 101); 
+  color: white;
+}
+
 
 .main {
   display: flex;
@@ -102,15 +83,18 @@
   justify-content: center;
   box-shadow: 5px 10px 10px gray;
   width: 1600px;
+
 }
 
 @media only screen and (max-width: 600px) and (max-width: 812px) {
+
   .main {
     display: flex;
     flex-direction: column;
     justify-content: center;
     box-shadow: 5px 10px 10px gray;
     width: 200px;
+
   }
 }
 
@@ -128,4 +112,5 @@ and (orientation: landscape) {
     font-size: 70%;
     color: #ce93d8;
   }
+
 }

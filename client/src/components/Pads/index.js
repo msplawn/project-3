@@ -15,6 +15,7 @@ import {
 import "./pads.css";
 
 const Pads = ({ soundData, handleClick }) => {
+
     const useStyles = makeStyles({
         table: {
             minWidth: 650,
