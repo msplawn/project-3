@@ -291,6 +291,7 @@ const init = async () => {
   await db.Sequence.findOneAndUpdate({ name: "Sequence 2"}, { $addToSet: { sounds: steps1.map(sound => sound._id) } });
   await db.Sequence.findOneAndUpdate({ name: "Sequence 3"}, { $addToSet: { sounds: steps2.map(sound => sound._id) } });
   console.log("Success");
+  process.exit();
 };
 
 init();
