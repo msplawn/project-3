@@ -28,7 +28,7 @@ Step 4. Run the app using the command below in your terminal:
 ## **Technology Stack**
 * HTML 
 * CSS
-* Tone.Js
+* Tone.js
 * Material UI
 * React.js
 * Express.js
