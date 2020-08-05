@@ -12,6 +12,7 @@ import {
 import { Types } from "mongoose";
 import StopIcon from '@material-ui/icons/Stop';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import SaveIcon from '@material-ui/icons/Save';
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -126,7 +127,7 @@ const Tools = ({
         },
         "8n"
       ).start(0);
-      Transport.bpm.value = 150
+      Transport.bpm.value = 150;
       Transport.start();
     } else {
       loaded().then(() => {
@@ -157,6 +158,9 @@ const Tools = ({
               <Typography variant="h4" color="inherit" noWrap className={classes.toolbarTitle}>
                 LILY-808
           </Typography>
+          <Button variant="outlined" className={classes.button} on={on} onClick={play}>
+            <SaveIcon />
+          </Button>
               <Button variant="outlined" className={classes.button} on={on} onClick={play}>
                 {on ? <StopIcon /> : <PlayArrowIcon />}
               </Button>

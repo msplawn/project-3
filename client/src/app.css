@@ -16,45 +16,47 @@
     background-color: var(--color-bg);
     padding: 20px;
   } */
-  .app {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      background-color: rgb(121, 255, 192);
-      font-family: 'Sigmar One', cursive;
-      
-  }
-  .app_header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin-bottom: calc(var(--spacer) * 1);
-    margin-left: var(--spacer);
-    margin-right: var(--spacer);
-  } 
 
-  .app_title   {
-      font-size: 80px;
-      color: purple;
-      
-  }
-  #frog {
-      width: 300px;
-      margin-bottom: 20px;
-  }
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgb(121, 255, 192);
+  font-family: 'Sigmar One', cursive;
+}
 
-  .interface {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    box-shadow: 5px 10px 10px gray;
-    margin: 20px;
-    /* margin-left: 20px; */
-  }
-  
-  /* @media only screen and (min-width: 820px) {
+.app_header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: calc(var(--spacer) * 1);
+  margin-left: var(--spacer);
+  margin-right: var(--spacer);
+}
+
+.app_title {
+  font-size: 80px;
+  color: #ce93d8;
+  text-shadow: -2px 0 #fff, 0 2px #fff, 2px 0 #fff, 0 -2px #fff;
+}
+
+#frog {
+  width: 300px;
+  margin-bottom: 20px;
+}
+
+.interface {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 5px 10px 10px gray;
+  margin: 20px;
+  /* margin-left: 20px; */
+}
+
+/* @media only screen and (min-width: 820px) {
     .app {
       margin-top: var(--spacer);
       margin-bottom: var(--spacer);
@@ -94,31 +96,36 @@
     background: transparent;
   } */
 
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 5px 10px 10px gray;
+  width: 1600px;
+}
+
+@media only screen and (max-width: 600px) and (max-width: 812px) {
   .main {
     display: flex;
     flex-direction: column;
     justify-content: center;
     box-shadow: 5px 10px 10px gray;
-    width: 1600px;
-    
+    width: 200px;
   }
-  @media only screen and (max-width: 600px) and (max-width: 812px) {
-    .main {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      box-shadow: 5px 10px 10px gray;
-      width: 200px;
-     
-    }
+}
+
+@media only screen 
+and (min-device-width: 300px) 
+and (max-device-width: 900px) 
+and (orientation: landscape) {
+  #frog {
+    display: none;
+    width: 10%;
+    margin-bottom: 20px;
   }
-  @media screen and (max-width: 1024px) {
-    #frog { 
-      width: 150px;
-      margin-bottom: 20px;
-    }
-    .app_title {
-      font-size: 30px;
-      color: purple;
-    }
+  .app_title {
+    display: none;
+    font-size: 70%;
+    color: #ce93d8;
   }
+}
