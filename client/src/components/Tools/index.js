@@ -17,7 +17,7 @@ import FormControl from '@material-ui/core/FormControl';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Transport, Loop, Player, Players, loaded, start } from "tone";
 import axios from "axios";
-import Download from '@axetroy/react-download';
+import fileDownload from 'react-file-download';
 
 //STYLES
 
@@ -72,14 +72,14 @@ const Tools = ({
   useEffect(() => {
     const beats = BPM || initialBpm;
     Transport.bpm.rampTo(beats, 1);
-  },[BPM])
+  }, [BPM])
 
   useEffect(() => {
     console.log("SEQUENCES:", sequences);
     const item = sequences.find(item => item.name === "Sequence 1");
     console.log("ITEM", item);
     setCurrentSequence(item);
-  },[sequences])
+  }, [sequences])
 
   const classes = useStyles();
   const [on, set] = useState(false);
@@ -95,22 +95,22 @@ const Tools = ({
     };
 
     const players = new Players(audio).toMaster();
-    
+
     if (!on) {
       let currentStep = 0;
       new Loop(
         function (time) {
           console.log(currentStep, currentSequence);
           // ------------ Closed Hat ----------------
-          if (currentStep === 15)  {
+          if (currentStep === 15) {
             currentStep = 0;
           } else {
             currentStep = currentStep + 1;
-          }; 
+          };
           if (currentSequence && currentSequence.sounds && currentSequence.sounds.length) {
-            if(players.loaded) {
+            if (players.loaded) {
               currentSequence.sounds.forEach(item => {
-                if(item.steps[currentStep].active) {
+                if (item.steps[currentStep].active) {
                   players.player(item.key).start();
                 }
               });
@@ -122,12 +122,12 @@ const Tools = ({
 
       Transport.start();
     } else {
-      if(players.loaded) {
+      if (players.loaded) {
         players.stopAll();
       }
       Transport.stop();
       Transport.cancel();
-    } 
+    }
   };
 
   const handleSequenceChange = (value) => {
@@ -140,6 +140,7 @@ const Tools = ({
   const download = () => {
     axios.post("/api/download", currentSequence).then(() => {
       console.log("Download", "dowloaded");
+      fileDownload(JSON.stringify(currentSequence.sounds, null, 2), "pattern.json");
     })
   }
 
@@ -149,42 +150,40 @@ const Tools = ({
 
       <CssBaseline />
       <Grid container>
-      <Grid item xs={12}>
-     
-        <Grid container justify="center">
-          <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
-            <Toolbar className={classes.toolbar}>
-              <Typography variant="h4" color="inherit" id="tool-title" noWrap className={classes.toolbarTitle}>
-                LILY-808
+        <Grid item xs={12}>
+
+          <Grid container justify="center">
+            <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
+              <Toolbar className={classes.toolbar}>
+                <Typography variant="h4" color="inherit" id="tool-title" noWrap className={classes.toolbarTitle}>
+                  LILY-808
           </Typography>
-          <Download file="sequence.json">
-          <Button variant="outlined" className={classes.button} on={on} onClick={download} id="save-button">
-            <SaveIcon />
-          </Button>
-          </Download>
-              <Button id="play-button" variant="outlined" className={classes.button} on={on} onClick={play}>
+                <Button id="play-button" variant="outlined" className={classes.button} on={on} onClick={download}>
+                  <SaveIcon />
+                </Button>
+                <Button id="play-button" variant="outlined" className={classes.button} on={on} onClick={play}>
 
-                {on ? <StopIcon /> : <PlayArrowIcon />}
-              </Button>
+                  {on ? <StopIcon /> : <PlayArrowIcon />}
+                </Button>
 
-              <TextField type="number" placeholder={initialBpm} min={60} max={200} onChange={(e) => setBPM(e.currentTarget.value)} variant="outlined" className={classes.bpm} label="BPM" id="bpm"/>
+                <TextField id="bpm" type="number" placeholder={initialBpm} min={60} max={200} onChange={(e) => setBPM(e.currentTarget.value)} variant="outlined" className={classes.bpm} label="BPM" />
 
-              <FormControl variant="outlined" className={classes.formControl} id="sequence">
-                <InputLabel id="">Sequence</InputLabel>
-                <Select
-                  label="Sequence"
-                  onChange={e => handleSequenceChange(e.currentTarget.value)}
-                >
-                  {sequences.map(item => {
-                    return <option value={item.name}>{item.name}</option>
-                  })}
-                </Select>
-              </FormControl>
+                <FormControl id="sequencer" variant="outlined" className={classes.formControl}>
+                  <InputLabel id="">Sequence</InputLabel>
+                  <Select
+                    label="Sequence"
+                    onChange={e => handleSequenceChange(e.currentTarget.value)}
+                  >
+                    {sequences.map(item => {
+                      return <option value={item.name}>{item.name}</option>
+                    })}
+                  </Select>
+                </FormControl>
 
-            </Toolbar>
-          </AppBar>
+              </Toolbar>
+            </AppBar>
+          </Grid>
         </Grid>
-      </Grid>
       </Grid>
     </div>
   );
