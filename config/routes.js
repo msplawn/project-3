@@ -1,3 +1,6 @@
+const fs = require("fs");
+const util = require("util");
+const writeFileAsync = util.promisify(fs.writeFile);
 const router = require('express').Router();
 const db = require('../models');
 
@@ -38,6 +41,17 @@ router.post('/sounds', function (req, res) {
   }).then(() => {
     return res.json("created");
   });
+});
+
+const download = async function ({ body }, _, next) {
+  const path = __dirname + "/../tmp/pattern.json";
+  const data = JSON.stringify(body, null, 2);
+  await writeFileAsync(path, data, 'utf8');
+  next();
+}
+router.post('/download', download, function(_, res){
+  const file =  __dirname + "/../tmp/pattern.json";
+  res.download(file); // Set disposition and send it.
 });
 
 module.exports = router;

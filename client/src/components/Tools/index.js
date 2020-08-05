@@ -15,8 +15,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { Transport, Loop, Player, loaded, start } from "tone";
-
+import { Transport, Loop, Player, Players, loaded, start } from "tone";
+import axios from "axios";
+import Download from '@axetroy/react-download';
 
 //STYLES
 
@@ -74,7 +75,9 @@ const Tools = ({
   },[BPM])
 
   useEffect(() => {
+    console.log("SEQUENCES:", sequences);
     const item = sequences.find(item => item.name === "Sequence 1");
+    console.log("ITEM", item);
     setCurrentSequence(item);
   },[sequences])
 
@@ -83,65 +86,45 @@ const Tools = ({
   const play = () => {
     start();
     set(!on);
-    const playerClosedHat = new Player(process.env.PUBLIC_URL + "/sounds/Closed-Hat.wav").toDestination();
-    const playerOpenHat = new Player(process.env.PUBLIC_URL + "/sounds/Open-Hat.wav").toDestination();
-    const playerSnare = new Player(process.env.PUBLIC_URL + "/sounds/Snare.wav").toDestination();
-    const playerKick = new Player(process.env.PUBLIC_URL + "/sounds/Kick.wav").toDestination();
+    const basePath = `${process.env.PUBLIC_URL}/sounds/`;
+    const audio = {
+      closedHat: `${basePath}Closed-Hat.wav`,
+      openHat: `${basePath}Open-Hat.wav`,
+      snare: `${basePath}Snare.wav`,
+      kick: `${basePath}Kick.wav`,
+    };
 
+    const players = new Players(audio).toMaster();
+    
     if (!on) {
       let currentStep = 0;
       new Loop(
         function (time) {
           console.log(currentStep, currentSequence);
           // ------------ Closed Hat ----------------
-          if (currentStep === currentSequence.sounds[0].steps.length - 1)  {
+          if (currentStep === 15)  {
             currentStep = 0;
           } else {
             currentStep = currentStep + 1;
           }; 
-          if (currentSequence.sounds[0].steps[currentStep].active) {
-            loaded().then(() => {
-              playerClosedHat.seek(0);
-              playerClosedHat.start();
-            });
-          };
-
-          // ------------ Open Hat ----------------
-          if (currentSequence.sounds[1].steps[currentStep].active) {
-            loaded().then(() => {
-              playerOpenHat.seek(0);
-              playerOpenHat.start();
-            });
-          };
-
-          // ------------ Snare ----------------
-          if (currentSequence.sounds[2].steps[currentStep].active) {
-            loaded().then(() => {
-              playerSnare.seek(0);
-              playerSnare.start();
-            });
-          };
-
-          // ------------ Kick ----------------
-          if (currentSequence.sounds[3].steps[currentStep].active) {
-            loaded().then(() => {
-              playerKick.seek(0);
-              playerKick.start();
-            });
-          };
+          if (currentSequence && currentSequence.sounds && currentSequence.sounds.length) {
+            if(players.loaded) {
+              currentSequence.sounds.forEach(item => {
+                if(item.steps[currentStep].active) {
+                  players.player(item.key).start();
+                }
+              });
+            }
+          }
         },
         "8n"
       ).start(0);
 
       Transport.start();
     } else {
-      loaded().then(() => {
-        playerClosedHat.stop();
-        playerOpenHat.stop();
-        playerSnare.stop();
-        playerKick.stop();
-
-      })
+      if(players.loaded) {
+        players.stopAll();
+      }
       Transport.stop();
       Transport.cancel();
     } 
@@ -153,6 +136,12 @@ const Tools = ({
     console.log(item);
     setCurrentSequence(item);
   };
+
+  const download = () => {
+    axios.post("/api/download", currentSequence).then(() => {
+      console.log("Download", "dowloaded");
+    })
+  }
 
   return (
 
@@ -168,11 +157,11 @@ const Tools = ({
               <Typography variant="h4" color="inherit" id="tool-title" noWrap className={classes.toolbarTitle}>
                 LILY-808
           </Typography>
-
-          <Button variant="outlined" className={classes.button} on={on} onClick={play}>
+          <Download file="sequence.json">
+          <Button variant="outlined" className={classes.button} on={on} onClick={download}>
             <SaveIcon />
           </Button>
-
+          </Download>
               <Button id="play-button" variant="outlined" className={classes.button} on={on} onClick={play}>
 
                 {on ? <StopIcon /> : <PlayArrowIcon />}

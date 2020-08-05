@@ -7,7 +7,8 @@ mongoose.connect(
 
 const sequenceSeed = [
   {
-    sound: "Closed-Hat",
+    key: "closedHat",
+    label: "Closed-Hat",
     steps: [
       { id: 1, active: true },
       { id: 2, active: true },
@@ -28,7 +29,8 @@ const sequenceSeed = [
     ]
   },
   {
-    sound: "Open-Hat",
+    key: "openHat",
+    label: "Open-Hat",
     steps: [
       { id: 1, active: false },
       { id: 2, active: false },
@@ -49,7 +51,8 @@ const sequenceSeed = [
     ]
   },
   {
-    sound: "Snare",
+    key: "snare",
+    label: "Snare",
     steps: [
       { id: 1, active: false },
       { id: 2, active: false },
@@ -70,7 +73,8 @@ const sequenceSeed = [
     ]
   },
   {
-    sound: "Kick",
+    key: "kick",
+    label: "Kick",
     steps: [
       { id: 1, active: true },
       { id: 2, active: false },
@@ -94,7 +98,8 @@ const sequenceSeed = [
 
 const sequenceSeed1 = [
   {
-    sound: "Closed-Hat",
+    key: "closedHat",
+    label: "Closed-Hat",
     steps: [
       { id: 1, active: false },
       { id: 2, active: false },
@@ -115,7 +120,8 @@ const sequenceSeed1 = [
     ]
   },
   {
-    sound: "Open-Hat",
+    key: "openHat",
+    label: "Open-Hat",
     steps: [
       { id: 1, active: false },
       { id: 2, active: false },
@@ -136,7 +142,8 @@ const sequenceSeed1 = [
     ]
   },
   {
-    sound: "Snare",
+    key: "snare",
+    label: "Snare",
     steps: [
       { id: 1, active: false },
       { id: 2, active: false },
@@ -157,7 +164,8 @@ const sequenceSeed1 = [
     ]
   },
   {
-    sound: "Kick",
+    key: "kick",
+    label: "Kick",
     steps: [
       { id: 1, active: false },
       { id: 2, active: false },
@@ -181,7 +189,8 @@ const sequenceSeed1 = [
 
 const sequenceSeed2 = [
   {
-    sound: "Closed-Hat",
+    key: "closedHat",
+    label: "Closed-Hat",
     steps: [
       { id: 1, active: true },
       { id: 2, active: true },
@@ -202,7 +211,8 @@ const sequenceSeed2 = [
     ]
   },
   {
-    sound: "Open-Hat",
+    key: "openHat",
+    label: "Open-Hat",
     steps: [
       { id: 1, active: true },
       { id: 2, active: false },
@@ -223,7 +233,8 @@ const sequenceSeed2 = [
     ]
   },
   {
-    sound: "Snare",
+    key: "snare",
+    label: "Snare",
     steps: [
       { id: 1, active: false },
       { id: 2, active: false },
@@ -244,7 +255,8 @@ const sequenceSeed2 = [
     ]
   },
   {
-    sound: "Kick",
+    key: "kick",
+    label: "Kick",
     steps: [
       { id: 1, active: true },
       { id: 2, active: false },
