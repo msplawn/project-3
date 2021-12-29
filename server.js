@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const apiRoutes = require("./config/routes");
 const { MongoClient } = require('mongodb');
-const uri = "mongodb+srv://mmsplawn:Haloone12016$@sounds.ztihs.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const uri = "mongodb+srv://mmsplawn:Haloone12016$@sounds.ztihs.mongodb.net/sounds?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Define middleware here
@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === "production") {
 
 // Connect to the MongoDB
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/sounds",
+  process.env.client || "mongodb://localhost/sounds",
   { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
 );
 
