@@ -25,7 +25,7 @@ client.connect(err => {
 
 // Connect to the MongoDB
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/sounds_db",
+  process.env.MONGODB_URI || "mongodb://localhost/sounds",
   { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
 );
 
