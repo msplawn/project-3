@@ -22,11 +22,10 @@ client.connect(err => {
   client.close();
 });
 
-
 // Connect to the MongoDB
 mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost/sounds",
-  { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
+  { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false }
 );
 
 // Use apiRoutes
