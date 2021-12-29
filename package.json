@@ -19,7 +19,6 @@
     "concurrently": "^4.1.0",
     "nodemon": "^1.18.7"
   },
-  
   "dependencies": {
     "@axetroy/react-download": "^1.1.1",
     "@babel/runtime": "7.0.0-beta.55",
@@ -32,4 +31,3 @@
     "mysql": "^2.18.1"
   }
 }
-
